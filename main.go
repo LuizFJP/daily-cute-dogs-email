@@ -1,14 +1,17 @@
 package main
 
 import (
-	"daily-cute-dogs-email/sender"
+	"daily-cute-dogs-email/backend/sender"
 	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"daily-cute-dogs-email/backend/api"
 )
 
 func main() {
+	go api.Start()
 	go sender.Start()
 
 	ch := make(chan os.Signal, 1)

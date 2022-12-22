@@ -7,8 +7,8 @@ type Response struct {
 	Status  string `json:"status"`
 }
 
-type Email struct {
+type Subscriber struct {
 	ID    primitive.ObjectID `bson:"_id, omitempty"`
-	Email string             `bson:"email"`
+	Email string             `bson:"email" json:"email"`
 }
 

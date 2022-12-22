@@ -3,7 +3,8 @@ package sender
 import (
 	"bytes"
 	"crypto/tls"
-	"daily-cute-dogs-email/models"
+	"daily-cute-dogs-email/backend/db"
+	"daily-cute-dogs-email/backend/models"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -20,7 +21,6 @@ import (
 var (
 	from     string = os.Getenv("FROM_EMAIL")
 	password string = os.Getenv("FROM_PASSWORD")
-	to       string = os.Getenv("SEND_EMAIL")
 )
 
 type message struct {
@@ -38,13 +38,22 @@ func Start() {
 func sendEmail() {
 	messager := &message{gomail.NewMessage()}
 
-	messager.loadHeader()
-	messager.createBody()
-	messager.dialer()
+	mdb := db.Start()
+	defer mdb.Finish()
 
+	emails, err := mdb.GetEmails()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	for _, to := range emails {
+		messager.loadHeader(to.Email)
+		messager.createBody()
+		messager.dialer()
+	}
 }
 
-func (m *message) loadHeader() {
+func (m *message) loadHeader(to string) {
 	m.SetHeader("From", from)
 	m.SetHeader("To", to)
 	m.SetHeader("Subject", "Seu doguinho fofo do dia chegou!")
@@ -73,6 +82,11 @@ func (m *message) fetchDog() *models.Response {
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	json.Unmarshal(body, response)
 	return response
 }
