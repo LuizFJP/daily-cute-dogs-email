@@ -1,0 +1,53 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.App {
+  height: 100vh;
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  flex-direction: column;
+  background-color: #31afd4;
+}
+
+h2, p, h4 {
+  text-align: center;
+  color: white;
+}
+
+@media (min-width: 412px) {
+  #name-input {
+      outline: none;
+      border: 6px solid white;
+      border-radius: 4px;
+      width: 50vh;
+  }
+}
+
+@media (max-width: 412px) {
+  #name-input {
+      outline: none;
+      border: 6px solid white;
+      border-radius: 4px;
+      width: 30vh;
+  }
+}
+
+
+#subscribe {
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+#subscribe input {
+  font-weight: bold;
+  font-size: medium;
+
+  color: white;
+  background-color: #CC5A71;
+  border-radius: 5px; 
+  height: 40px;
+  width: 180px;
+}
