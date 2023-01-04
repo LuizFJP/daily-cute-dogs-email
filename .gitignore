@@ -10,6 +10,7 @@ __debug_bin
 *.test
 k8s
 .vscode
+docker-compose.yml
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 

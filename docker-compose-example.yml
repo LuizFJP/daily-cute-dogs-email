@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  frontend-cute-dogs:
+    image: luizportel4/cute-dogs-frontend:2.3.2
+    depends_on:
+      - "backend-cute-dogs"
+    environment:
+      REACT_APP_YOUR_DOMAIN: http://localhost:3001
+  backend-cute-dogs:
+    image: luizportel4/cute-dogs-backend:2.2.2
+    depends_on:
+      - "mongodb-cute-dogs"
+    environment:
+      FROM_EMAIL:
+      FROM_PASSWORD:
+      MONGO_CREDENTIALS: mongodb://127.0.0.1:27017
+      MONGO_DB:
+      MONGO_COLLECTION:
+    ports:
+      - "3001:3001"
+  mongodb-cute-dogs:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD: 
+    ports:
+      - "27017:27017"
+  
