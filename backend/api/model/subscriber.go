@@ -9,3 +9,11 @@ func CreateSubscribe(email string) error {
 	}
 	return nil
 }
+
+func DeleteSubscribe(email string) error {
+	mdb := db.Start()
+	if err := mdb.DeleteEmail(email); err != nil {
+		return err
+	}
+	return nil
+}

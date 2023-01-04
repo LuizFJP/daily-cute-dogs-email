@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"daily-cute-dogs-email/backend/models"
+	"errors"
 	"log"
 	"os"
 	"time"
@@ -14,7 +15,8 @@ import (
 )
 
 type DB struct {
-	*mongo.Client
+	client     *mongo.Client
+	collection *mongo.Collection
 }
 
 func Start() *DB {
@@ -29,18 +31,19 @@ func Start() *DB {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return &DB{client}
+	collection := client.Database(os.Getenv("MONGO_DB")).Collection(os.Getenv("MONGO_COLLECTION"))
+
+	return &DB{client, collection}
 }
 
 func (d *DB) Finish() {
-	if err := d.Disconnect(context.TODO()); err != nil {
+	if err := d.client.Disconnect(context.TODO()); err != nil {
 		log.Fatal(err)
 	}
 }
 
 func (d *DB) GetEmails() ([]models.Subscriber, error) {
-	collection := d.Database(os.Getenv("MONGO_DB")).Collection(os.Getenv("MONGO_COLLECTION"))
-	cursor, err := collection.Find(context.Background(), bson.M{})
+	cursor, err := d.collection.Find(context.Background(), bson.M{})
 	if err != nil {
 		return []models.Subscriber{}, err
 	}
@@ -64,9 +67,44 @@ func (d *DB) GetEmails() ([]models.Subscriber, error) {
 }
 
 func (d *DB) AddEmail(email string) error {
-	collection := d.Database(os.Getenv("MONGO_DB")).Collection(os.Getenv("MONGO_COLLECTION"))
-	if _, err := collection.InsertOne(context.TODO(), bson.M{"email": email}); err != nil {
+	checkEmail, err := d.checkEmailAlreadyExists(email)
+	if err != nil {
 		return err
 	}
-	return nil
+	if checkEmail {
+		return errors.New("email já existe, adicione outro")
+	} else {
+		_, err = d.collection.InsertOne(context.TODO(), bson.M{"email": email})
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+}
+
+func (d *DB) DeleteEmail(email string) error {
+	checkEmail, err := d.checkEmailAlreadyExists(email)
+	if err != nil {
+		return err
+	}
+	if !checkEmail {
+		return errors.New("email não encontrado")
+	} else {
+		_, err = d.collection.DeleteOne(context.TODO(), bson.M{"email": email})
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+}
+
+func (d *DB) checkEmailAlreadyExists(email string) (bool, error) {
+	cur, err := d.collection.Find(context.TODO(), bson.M{"email": email})
+	if err != nil {
+		return true, err
+	}
+	if cur.RemainingBatchLength() != 0 {
+		return true, nil
+	}
+	return false, nil
 }

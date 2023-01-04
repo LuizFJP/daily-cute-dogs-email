@@ -5,10 +5,11 @@
 *.so
 *.dylib
 .env
-
+__debug_bin
 # Test binary, built with `go test -c`
 *.test
-
+k8s
+.vscode
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 

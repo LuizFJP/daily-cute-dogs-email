@@ -7,6 +7,8 @@ import (
 )
 
 func Router(app *fiber.App) {
-	app.Post("/", controller.CreateSubscribe)
+	api := app.Group("/api")
+	api.Post("/", controller.CreateSubscribe)
+	api.Delete("/", controller.DeleteSubscribe)
 
 }

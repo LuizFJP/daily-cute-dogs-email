@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cute-dogs-frontend
+spec:
+  selector:
+    matchLabels:
+      app: cute-dogs-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cute-dogs-frontend
+    spec:
+      containers:
+      - name: cute-dogs-frontend
+        image: luizportel4/cute-dogs-frontend:2.3.2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 3000

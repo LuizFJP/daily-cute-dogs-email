@@ -8,3 +8,10 @@ func CreateSubscribe(email string) error {
 	}
 	return nil
 }
+
+func DeleteSubscribe(email string) error {
+	if err := model.DeleteSubscribe(email); err != nil {
+		return err
+	}
+	return nil
+}
