@@ -11,8 +11,8 @@ Todos os créditos das imagens vão para **[Dog API](https://dog.ceo/dog-api/)**
 - ⚙️ [Configurando variáveis de ambiente](#configurando-variáveis-de-ambiente)
 - 🌐 [Configurando o arquivo nginx.conf (apenas em caso de - deploy)](#configurando-o-arquivo-nginxconf-apenas-em-caso-de-deploy)
 - 🖥️ [Como rodar a aplicação](#como-rodar-a-aplicação)
-- 🐋 [Rodando no docker-compose](#rodando-no-docker-compose)
 - 💻 [Rodando localmente](#rodando-localmente)
+- 🐋 [Rodando no docker-compose](#rodando-no-docker-compose)
 - 🥭 [Criar uma database e collection no MongoDB](#3-criar-uma-database-e-collection-no-mongodb)
 - ⛵ [Deploy por meio do Kubernetes](#deploy-por-meio-do-kubernetes)
 
@@ -87,11 +87,6 @@ O projeto pode ser executado:
 2. [docker-compose](#rodando-no-docker-compose)
 3. [Deploy por meio do Kubernetes](#deploy-por-meio-do-kubernetes)
 
-## Rodando no docker-compose
-Acesse o arquivo **_./docker-compose-example.yml_** e altere seu nome para **docker-compose.yml**
-1. [Configure as variaveis de ambiente](#configurando-variáveis-de-ambiente)
-2. Rode o comando ```docker-compose up -d``` para executar os containers em background.
-
 ## Rodando localmente
 
 Será necessário as seguintes ferramentas instaladas:
@@ -103,8 +98,12 @@ Será necessário as seguintes ferramentas instaladas:
 2. No mongodb [crie uma database e collection](#3-criar-uma-database-e-collection-no-mongodb) com o mesmo valor informado nas variáveis de ambiente.
 3. Na raiz do projeto rode o comando ```go run main.go``` para rodar o servidor.
 4. Vá para dentro da pasta **./frontend/cute-dogs** e execute o comando ```npm start``` para iniciar o frontend.
-5. Acesse a aplicação em http://localhost:3000 
+5. Acesse a aplicação em http://localhost:3000
 
+## Rodando no docker-compose
+Acesse o arquivo **_./docker-compose-example.yml_** e altere seu nome para **docker-compose.yml**
+1. [Configure as variaveis de ambiente](#configurando-variáveis-de-ambiente)
+2. Rode o comando ```docker-compose up -d``` para executar os containers em background.
 ### 3. Criar uma database e collection no MongoDB
 3.1. Para criar o banco no mongo e a collection acesse o container pelo seguinte comando ```docker exec -it mongodb-cute-dogs bash ```
 
