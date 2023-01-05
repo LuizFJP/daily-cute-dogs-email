@@ -6,7 +6,7 @@ upstream backend {
 
 server {
     listen 3000;
-    server_name $your-dns:3000;
+    server_name $your-domain:3000;
 
     root /usr/share/nginx/html;
     index index.html;
