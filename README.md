@@ -127,4 +127,4 @@ Os arquivos encontram-se no diretorio raiz **_./k8s-example_** e voce pode renom
 
 Espero que tenha gostado ❤️
 
-[!doguinho-fogo](./assets/doguinho.jpg)
+![doguinho-fofo](./assets/doguinho.jpg)
