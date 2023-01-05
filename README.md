@@ -65,7 +65,7 @@ O segundo localizado no diretório **/frontend/cute-dogs/.env.example** recebe o
 REACT_APP_YOUR_DOMAIN=http://localhost:3001
 ```
 
-> **_OBSERVAÇÃO:_** o valor inserido aponta para o servidor backend localmente, mas caso seja realizado deploy o valor deverá ser o DNS, configurado no arquivo arquivo **[nginx.conf](#configurando-o-arquivo-nginxconf-apenas-em-caso-de-deploy)**.
+> **_OBSERVAÇÃO:_** o valor inserido aponta para o servidor backend localmente, mas caso seja realizado deploy o valor deverá ser o domínio ou seu external-ip, configurado no arquivo arquivo **[nginx.conf](#configurando-o-arquivo-nginxconf-apenas-em-caso-de-deploy)**.
 
 ## Configurando o arquivo nginx.conf (apenas em caso de deploy) 
 
@@ -74,11 +74,8 @@ Altere o nome do arquivo **_nginx.conf.example_** para **_nginx.conf_** localiza
 Altere os valores:
 
 ```
-$your-dns=seu-dns.com
-$your-port=porta (Ex.: 3001)
+$your-domain=seu-dominio.com
 ```
-
-> **_OBSERVAÇÃO:_** para portas com valores default HTTP (80) ou HTTPS (403) não é necessário informar.
 
 # Como rodar a aplicação
 
