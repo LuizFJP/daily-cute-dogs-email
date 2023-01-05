@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cute-dogs-backend
-        image: luizportel4/cute-dogs-backend:2.2.2
+        image: luizportel4/cute-dogs-backend:2.2.3
         resources:
           limits:
             memory: "50Mi"
