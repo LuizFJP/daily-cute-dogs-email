@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cute-dogs-frontend
-        image: luizportel4/cute-dogs-frontend:2.3.3
+        image: luizportel4/cute-dogs-frontend:2.3.5
         resources:
           limits:
             memory: "128Mi"

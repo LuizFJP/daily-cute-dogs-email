@@ -25,7 +25,6 @@ function App() {
   }
 
   async function fetchCreate() {
-
     let response = await fetch(`${env.REACT_APP_YOUR_DOMAIN}/api`, {
       method: 'POST',
       headers: {
