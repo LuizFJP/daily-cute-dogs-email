@@ -14,9 +14,11 @@ services:
     environment:
       FROM_EMAIL:
       FROM_PASSWORD:
-      MONGO_CREDENTIALS: mongodb://127.0.0.1:27017
+      MONGO_CREDENTIALS: mongodb://mongodb-cute-dogs:27017
       MONGO_DB:
       MONGO_COLLECTION:
+    links:
+      - mongodb-cute-dogs:27017
     ports:
       - "3001:3001"
   mongodb-cute-dogs:
