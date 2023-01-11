@@ -108,8 +108,10 @@ func (m *message) createBody() {
 
 	t.Execute(&body, struct {
 		Link string
+		URL string
 	}{
 		Link: fetchResponse.Message,
+		URL: setURL(),
 	})
 
 	m.SetBody("text/html", body.String())
@@ -119,4 +121,12 @@ func (m *message) dialer(d *gomail.Dialer) {
 	if err := d.DialAndSend(m.Message); err != nil {
 		fmt.Println(err)
 	}
+}
+
+func setURL() string {
+	url := os.Getenv("REACT_APP_YOUR_DOMAIN")
+	if url == "" {
+		url = "localhost:3000"
+	}
+	return url
 }
